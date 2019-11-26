@@ -1,9 +1,6 @@
-info:
-  component: Discovery Services - ${PORT:8761}
-
 spring:
   application:
-    name: eureka-service
+    name: eureka-server
   cloud:
     config:
-      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
+      uri: http://localhost:8888

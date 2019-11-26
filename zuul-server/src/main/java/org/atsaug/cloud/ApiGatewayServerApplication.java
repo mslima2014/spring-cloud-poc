@@ -1,5 +1,5 @@
 /* java *****************************************************************************\
- *               *  Project: spring-cloud-poc                         *
+ *               *  Project: spring-cloud-poc                                       *
  *    #####      *  (!) Francesco Guastamacchia <guastamacchia.francesco@gmail.com> *
  *   ######      *                                                                  *
  *   ####  \     *  Copying and distribution of this file, with or without          *
@@ -20,8 +20,8 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableZuulProxy
 @EnableDiscoveryClient
 @SpringBootApplication
-public class GatewayServerApplication {
+public class ApiGatewayServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GatewayServerApplication.class, args);
+        SpringApplication.run(ApiGatewayServerApplication.class, args);
     }
 }

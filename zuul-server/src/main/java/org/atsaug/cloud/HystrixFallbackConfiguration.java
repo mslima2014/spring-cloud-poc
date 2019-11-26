@@ -1,5 +1,5 @@
 /* java *****************************************************************************\
- *               *  Project: spring-cloud-poc                         *
+ *               *  Project: spring-cloud-poc                                       *
  *    #####      *  (!) Francesco Guastamacchia <guastamacchia.francesco@gmail.com> *
  *   ######      *                                                                  *
  *   ####  \     *  Copying and distribution of this file, with or without          *
