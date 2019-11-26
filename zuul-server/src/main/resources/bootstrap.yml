@@ -1,0 +1,9 @@
+info:
+  component: Api Gateway Services - ${PORT:8080}
+
+spring:
+  application:
+    name: zuul-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
