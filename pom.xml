@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.atsaug.cloud</groupId>
+    <artifactId>spring-cloud-poc</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <properties>
+        <revision>1.0</revision>
+    </properties>
+    <name>${project.artifactId}</name>
+    <description>${project.name}</description>
+    <modules>
+
+        <!-- parent project -->
+        <module>dependencies</module>
+
+        <!-- spring-cloud components-->
+        <module>config-server</module>
+        <module>eureka-server</module>
+        <module>zuul-server</module>
+
+        <!-- microservices-archetype -->
+        <module>microservices</module>
+    </modules>
+    <profiles>
+        <profile>
+            <id>repository</id>
+            <activation>
+                <property>
+                    <name>repository</name>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>repository</id>
+                    <url>${repository}</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>repository</id>
+                    <url>${repository}</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+</project>
