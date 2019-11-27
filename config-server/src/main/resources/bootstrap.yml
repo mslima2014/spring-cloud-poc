@@ -1,9 +1,6 @@
 info:
   component: Configurations Service
 
-server:
-  port: ${server.port}
-
 spring:
   application:
     name: config-server
@@ -13,3 +10,7 @@ spring:
         git:
           uri: ${spring-cloud-poc-config.git}
           skip-ssl-validation: true
+
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
