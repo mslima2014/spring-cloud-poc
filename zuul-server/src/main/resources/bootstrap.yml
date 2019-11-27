@@ -3,7 +3,7 @@ spring:
     name: zuul-server
   cloud:
     config:
-      uri: http://${config.instance.hostname}:${config.instance.port}
+      uri: http://${config.server.host}:${config.server.port}
       fail-fast: true
 
 logging:
