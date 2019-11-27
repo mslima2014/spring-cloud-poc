@@ -1,6 +1,3 @@
-info:
-  component: Configurations Service
-
 spring:
   application:
     name: config-server
