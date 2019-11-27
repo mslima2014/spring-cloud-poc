@@ -1,8 +1,8 @@
 info:
-  component: Configurations Services - ${PORT:8888}
+  component: Configurations Service
 
 server:
-  port: ${PORT:8888}
+  port: ${server.port}
 
 spring:
   application:
@@ -11,5 +11,5 @@ spring:
     config:
       server:
         git:
-          uri: ${CONFIG_REPOSITORY_URL}/config-repo
+          uri: ${spring-cloud-poc-config.git}
           skip-ssl-validation: true

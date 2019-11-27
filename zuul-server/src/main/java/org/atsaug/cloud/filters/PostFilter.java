@@ -10,16 +10,41 @@
  *               *  See: https://github.com/atsaug                                  *
 \************************************************************************************/
 
-package org.atsaug.cloud;
+package org.atsaug.cloud.filters;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import java.util.List;
 
-@EnableEurekaServer
-@SpringBootApplication
-public class DiscoveryServerApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DiscoveryServerApplication.class, args);
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+
+@SuppressWarnings("unchecked")
+public class PostFilter extends ZuulFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostFilter.class);
+
+    @Override
+    public String filterType() {
+        return FilterConstants.POST_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 999999;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        final List<String> routing = (List<String>) RequestContext.getCurrentContext().get("routingDebug");
+        routing.forEach(LOGGER::info);
+        return routing;
     }
 }

@@ -10,33 +10,41 @@
  *               *  See: https://github.com/atsaug                                  *
 \************************************************************************************/
 
-package org.atsaug.cloud;
+package org.atsaug.cloud.filters;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
-@RestController
-@EnableDiscoveryClient
-@SpringBootApplication
-public class MicroservicesApplication {
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.exception.ZuulException;
 
-    public static void main(String[] args) {
-        SpringApplication.run(MicroservicesApplication.class, args);
+public class RouteFilter extends ZuulFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RouteFilter.class);
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
     }
 
-    @SuppressWarnings("serial")
-    @RequestMapping(value = "/go")
-    public List<String> available() {
-        return new ArrayList<String>() {{
-            System.getenv().forEach((k, v) -> {
-                add(k + ":" + v);
-            });
-        }};
+    @Override
+    public String filterType() {
+        return FilterConstants.ROUTE_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 1;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        final String RESULT = URI.create(RequestContext.getCurrentContext().getRequest().getRequestURI()).getPath();
+        LOGGER.info("New request for: " + RESULT);
+        return RESULT;
     }
 }

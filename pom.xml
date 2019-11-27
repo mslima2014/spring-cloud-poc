@@ -29,25 +29,25 @@
         <profile>
             <id>repository</id>
             <activation>
-                <property>
-                    <name>repository</name>
-                </property>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <repositories>
                 <repository>
-                    <id>repository</id>
-                    <url>${repository}</url>
+                    <id>spring-milestones</id>
+                    <name>Spring Milestones</name>
+                    <url>https://repo.spring.io/milestone</url>
                     <snapshots>
-                        <enabled>true</enabled>
+                        <enabled>false</enabled>
                     </snapshots>
                 </repository>
             </repositories>
             <pluginRepositories>
                 <pluginRepository>
-                    <id>repository</id>
-                    <url>${repository}</url>
+                    <id>spring-milestones</id>
+                    <name>Spring Milestones</name>
+                    <url>https://repo.spring.io/milestone</url>
                     <snapshots>
-                        <enabled>true</enabled>
+                        <enabled>false</enabled>
                     </snapshots>
                 </pluginRepository>
             </pluginRepositories>

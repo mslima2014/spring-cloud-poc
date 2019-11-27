@@ -3,4 +3,5 @@ spring:
     name: microservices
   cloud:
     config:
-      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
+      uri: http://${config.instance.hostname}:${config.instance.port}
+      fail-fast: true
