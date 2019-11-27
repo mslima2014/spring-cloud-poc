@@ -10,28 +10,41 @@
  *               *  See: https://github.com/atsaug                                  *
 \************************************************************************************/
 
-package org.atsaug.cloud;
+package org.atsaug.cloud.filters;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.context.annotation.Bean;
+import java.util.List;
 
-import brave.sampler.Sampler;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
-@EnableSwagger2
-@EnableZuulProxy
-@EnableDiscoveryClient
-@SpringBootApplication
-public class ApiGatewayServerApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ApiGatewayServerApplication.class, args);
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+
+@SuppressWarnings("unchecked")
+public class PostFilter extends ZuulFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostFilter.class);
+
+    @Override
+    public String filterType() {
+        return FilterConstants.POST_TYPE;
     }
 
-    @Bean
-    public Sampler defaultSampler() {
-        return Sampler.ALWAYS_SAMPLE;
+    @Override
+    public int filterOrder() {
+        return 999999;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        final List<String> routing = (List<String>) RequestContext.getCurrentContext().get("routingDebug");
+        routing.forEach(LOGGER::info);
+        return routing;
     }
 }

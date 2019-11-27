@@ -2,7 +2,7 @@ info:
   component: Configurations Service
 
 server:
-  port: 8888
+  port: ${server.port}
 
 spring:
   application:
@@ -11,5 +11,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/atsaug/spring-cloud-poc-config.git
+          uri: ${spring-cloud-poc-config.git}
           skip-ssl-validation: true

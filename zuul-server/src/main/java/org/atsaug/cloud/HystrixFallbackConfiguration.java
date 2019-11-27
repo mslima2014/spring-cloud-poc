@@ -39,6 +39,7 @@ public class HystrixFallbackConfiguration {
             @Override
             public ClientHttpResponse fallbackResponse(String route, Throwable throwable) {
                 return new ClientHttpResponse() {
+
                     @Override
                     public HttpStatus getStatusCode() throws IOException {
                         return HttpStatus.OK;
@@ -46,22 +47,23 @@ public class HystrixFallbackConfiguration {
 
                     @Override
                     public int getRawStatusCode() throws IOException {
-                        return 200;
+                        return HttpStatus.OK.value();
                     }
 
                     @Override
                     public String getStatusText() throws IOException {
-                        return "OK";
+                        return HttpStatus.OK.getReasonPhrase();
                     }
 
                     @Override
                     public void close() {
-
+                        // NO-OP
                     }
 
                     @Override
                     public InputStream getBody() throws IOException {
-                        return new ByteArrayInputStream("Sorry, service is down!".getBytes());
+                        String unavailable = "Sorry, service is down!";
+                        return new ByteArrayInputStream(unavailable.getBytes());
                     }
  
                     @Override
