@@ -1,3 +1,6 @@
+info:
+  component: ${spring.application.name}
+
 spring:
   application:
     name: config-server
